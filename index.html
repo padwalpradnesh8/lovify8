@@ -119,12 +119,6 @@
       font-weight:900;
       letter-spacing:-1.25px;
     }
-    .logo-main span{
-      color:var(--pink);
-      font-size:28px;
-      margin-left:4px;
-      vertical-align:top;
-    }
     .logo-sub{
       margin-top:6px;
       font-size:8px;
@@ -380,16 +374,6 @@
       width:78%;
       height:23%;
       background:var(--lime);
-    }
-    .star{
-      position:absolute;
-      top:12px;
-      right:18px;
-      z-index:2;
-      font-size:84px;
-      font-weight:900;
-      line-height:1;
-      color:#000;
     }
         .mic{
       position:absolute;
@@ -1191,11 +1175,8 @@
       inset:0;
       z-index:60;
       background:var(--bg);
-      display:flex;
-      flex-direction:column;
-      padding:20px 24px calc(24px + env(safe-area-inset-bottom));
-      overflow-y:auto;
       isolation:isolate;
+      overflow:hidden;
     }
     .now-playing::before{
       content:"";
@@ -1213,6 +1194,15 @@
       inset:0;
       background:linear-gradient(180deg, rgba(0,0,0,.38), rgba(0,0,0,.74));
       z-index:-1;
+    }
+    .np-scroll{
+      position:absolute;
+      inset:0;
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+      display:flex;
+      flex-direction:column;
+      padding:20px 24px calc(24px + env(safe-area-inset-bottom));
     }
     .np-header{
       display:flex;
@@ -1250,16 +1240,6 @@
       letter-spacing:.3px;
     }
     .np-brand-title span{color:var(--pink)}
-    .np-brand-mark{
-      background:var(--pink);
-      color:#000;
-      font-size:34px;
-      font-weight:900;
-      width:64px;height:64px;
-      flex-shrink:0;
-      display:grid;
-      place-items:center;
-    }
 
     .np-art{
       position:relative;
@@ -1289,13 +1269,6 @@
       width:92%;height:92%;
       object-fit:cover;
       border-radius:24px;
-    }
-    .np-art-mark{
-      position:absolute;
-      top:6%;right:2%;
-      color:#000;
-      font-size:38px;
-      font-weight:900;
     }
 
     .np-meta{
@@ -1418,7 +1391,7 @@
     }
 
     @media (max-width:900px){
-      .now-playing{padding:16px 18px calc(18px + env(safe-area-inset-bottom))}
+      .np-scroll{padding:16px 18px calc(18px + env(safe-area-inset-bottom))}
       .now-playing::before{
         background-image:url("assets/op.png");
       }
@@ -1469,7 +1442,7 @@
       .about-section{
         padding:60px 20px 50px;
         background-image:
-          linear-gradient(180deg, rgba(2,2,2,.6), rgba(2,2,2,.65) 45%, var(--bg) 95%),
+          linear-gradient(180deg, rgba(2,2,2,.9), rgba(2,2,2,.95) 45%, var(--bg) 95%),
           url('assets/ms.png');
       }
     }
@@ -1489,17 +1462,6 @@
       width:220px;height:220px;
       bottom:-90px;right:-90px;
       border-color:rgba(142,202,230,.3);
-    }
-    .about-watermark{
-      position:absolute;
-      top:-40px;right:-40px;
-      font-size:min(50vw,480px);
-      line-height:1;
-      color:rgba(255,255,255,.035);
-      font-weight:900;
-      pointer-events:none;
-      z-index:0;
-      user-select:none;
     }
 
     .about-top,
@@ -1552,16 +1514,6 @@
       letter-spacing:1px;
       color:var(--white);
       text-align:right;
-    }
-    .about-mark{
-      background:var(--pink);
-      color:#000;
-      font-size:24px;
-      font-weight:900;
-      width:48px;height:48px;
-      flex-shrink:0;
-      display:grid;
-      place-items:center;
     }
 
     .about-divider{
@@ -1667,17 +1619,6 @@
       padding-top:32px;
       border-top:1px solid rgba(255,255,255,.1);
     }
-    .about-footer-mark{
-      color:var(--purple);
-      font-size:28px;
-      font-weight:900;
-      flex-shrink:0;
-    }
-    .about-footer-divider{
-      width:1px;
-      align-self:stretch;
-      background:rgba(255,255,255,.2);
-    }
     .about-footer-text{
       font-family:"Anton",sans-serif;
       font-weight:400;
@@ -1739,7 +1680,7 @@
     </div>
     <header class="header">
       <a href="#" class="logo" aria-label="Lovify home">
-        <div class="logo-main">LOVIFY <span>*</span></div>
+        <div class="logo-main">LOVIFY</div>
         <div class="logo-sub">COVERS. VOICES. IMPACT.</div>
       </a>
 
@@ -1795,7 +1736,6 @@
         <div class="pink-box"></div>
         <div class="purple-circle"></div>
         <div class="lime-box"></div>
-        <div class="star">*</div>
         <img class="mic" src="assets/mic.png" alt="">
         <div class="impact-card">
           Real Artists.<br>
@@ -1861,14 +1801,12 @@
       their cover with the world — this one's for you.
     </p>
     <div class="special-thanks-collage">
-      <img src="assets/cover.jpeg" alt="Collage of Lovify creators" loading="lazy" />
+      <img src="assets/cover.jpg" alt="Collage of Lovify creators" loading="lazy" />
     </div>
   </section>
 
   <!-- ABOUT — inline on the homepage, right after the songs -->
   <section id="about-section" class="about-section">
-
-    <div class="about-watermark" aria-hidden="true">✳</div>
 
     <div class="about-top">
       <div class="about-top-text">
@@ -1883,7 +1821,6 @@
 
       <div class="about-top-brand">
         <p class="about-tagline">Real Artists.<br>Real Covers.<br>Real Impact.</p>
-        <div class="about-mark">✳</div>
       </div>
     </div>
 
@@ -1943,8 +1880,6 @@
     </div>
 
     <div class="about-footer">
-      <div class="about-footer-mark">✳</div>
-      <div class="about-footer-divider"></div>
       <p class="about-footer-text">
         We're more than a platform.<br><span>We're a movement.</span>
       </p>
@@ -2019,6 +1954,7 @@
        same playback state via separate np-* ids kept in sync by
        player-ui-events.js; does not duplicate any playback logic. -->
   <div id="now-playing-view" class="now-playing hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Now playing">
+   <div class="np-scroll">
 
     <header class="np-header">
       <button id="np-collapse-btn" class="np-icon-btn" type="button" aria-label="Collapse now playing">⌄</button>
@@ -2028,14 +1964,12 @@
 
     <div class="np-brand">
       <h2 class="np-brand-title">Real Artists.<br>Real Covers.<br>Real <span>Impact.</span></h2>
-      <div class="np-brand-mark">✳</div>
     </div>
 
     <div class="np-art">
       <div class="np-art-pink"></div>
       <div class="np-art-purple"></div>
       <img id="np-cover" class="np-art-photo" alt="" />
-      <div class="np-art-mark">✳</div>
     </div>
 
     <div class="np-meta">
@@ -2074,6 +2008,7 @@
       <div id="np-queue-list"></div>
     </div>
 
+   </div>
   </div>
 
   <!-- AUTH MODAL -->
